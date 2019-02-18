@@ -1,2 +1,2 @@
 # geeksforgeeks
-geeksforgeeks solution in java
+geeksforgeeks solution in C++
