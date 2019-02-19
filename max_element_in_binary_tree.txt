@@ -1,0 +1,58 @@
+Give an algorithm for finding maximum element in binary tree 
+
+
+Recursive
+
+
+// Returns maximum value in a given Binary Tree 
+int findMax(struct Node* root) 
+{ 
+    // Base case 
+    if (root == NULL) 
+      return INT_MIN; 
+  
+    // Return maximum of 3 values: 
+    // 1) Root's data 2) Max in Left Subtree 
+    // 3) Max in right subtree 
+    int res = root->data; 
+    int lres = findMax(root->left); 
+    int rres = findMax(root->right); 
+    if (lres > res) 
+      res = lres; 
+    if (rres > res) 
+      res = rres; 
+    return res; 
+} 
+
+
+
+Iterative way
+
+
+
+int max=INT_MIN;
+
+
+void traverse(Node* root)
+{
+    queue<Node*> q;
+
+    if (root) {
+        q.push(root);
+    }
+    while (!q.empty())
+    {
+        const Node * const temp_node = q.front();
+        q.pop();
+        cout<<temp_node->value<<"\n";
+
+		if(max<temp_node->data)
+			max=temp_node;
+        if (temp_node->left) {
+            q.push(temp_node->left);
+        }
+        if (temp_node->right) {
+            q.push(temp_node->right);
+        }
+    }
+}
