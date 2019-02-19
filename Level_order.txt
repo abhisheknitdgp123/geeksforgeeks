@@ -1,0 +1,34 @@
+Level order_non_recursive
+
+
+
+
+void traverse(Node* root)
+{
+    queue<Node*> q;
+
+    if (root) {
+        q.push(root);
+    }
+    while (!q.empty())
+    {
+        const Node * const temp_node = q.front();
+        q.pop();
+        cout<<temp_node->value<<"\n";
+
+        if (temp_node->left) {
+            q.push(temp_node->left);
+        }
+        if (temp_node->right) {
+            q.push(temp_node->right);
+        }
+    }
+}
+
+
+
+
+
+Recursive
+
+
