@@ -44,7 +44,7 @@ int main() {
   LinkedList MyList;
 
   //Add three elements at the start of the list.
-  MyList.push_front(10);
+  MyList.push_front(10);  // Always remeber we are passing data not the node. Because we are inserting the value of a node
   MyList.push_front(20);
   MyList.push_front(30);
   MyList.PrintList();
