@@ -17,37 +17,54 @@ Output: [0,1]
 1. Using Hashing / Hash map technique
 
 #include <iostream>
+ 
+#include <fstream>
 #include <string>
 #include<unordered_map>
+
 using namespace std;
 
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int> numMap;
+
+         // base case
+
+        int size = nums.size();
+        if (size < 2) return nums;
+       
+        unordered_map<int, int> seen;
+        seen.reserve(nums.size());  // the sample1 size is reserved for the bucket to contain a minimum of nums.size() elements.
+
         for (int i = 0; i < nums.size(); i++) {
-            numMap[nums[i]] = i;
+            seen[nums[i]] = i;
         }
         for (int i = 0; i < nums.size(); i++) {
-            int complement = target - nums[i];
-            if (numMap.count(complement) && numMap[complement] != i) {
-                return { i, numMap[complement] };
-            }
+            int difference = target - nums[i];
+            auto it = seen.find(difference);
+            if (it != seen.end())
+                return vector<int>{it->second + 1, it};
+            seen.insert(make_pair(nums[i], i));
         }
-        return {};
+        return vector<int>{};
     }
 };
 
 int main()
 {
     
+                    
     vector<int> V = { 2,7,11,15 };
+
     Solution sum;
     int n = 9;
+
     vector<int> result = sum.twoSum(V, n);
+
     for (int i = 0;i < result.size();i++) {
         cout << result[i];
         cout << endl;
     }
     return 0;
 }
+ 
