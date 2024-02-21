@@ -67,4 +67,84 @@ int main()
     }
     return 0;
 }
- 
+
+********************************Two pointer approach ************
+
+#include <fstream>
+#include <string>
+#include<unordered_map>
+#include <algorithm>
+using namespace std;
+
+#include <algorithm>
+
+class Solution {
+public:
+
+    class Pair
+    {
+    public:
+        int index;
+        int val;
+        Pair(int i, int v)
+        {
+            index = i;
+            val = v;
+        }
+    };
+
+    class less_than_key
+    {
+    public:
+        const bool operator() (const Pair& a, const Pair& b)
+        {
+            return (a.val < b.val);
+        }
+    };
+
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+
+        vector<int> result;
+        int length = numbers.size();
+        vector<Pair> pairs;
+        for (int i = 0; i < length; i++)
+        {
+            pairs.push_back(Pair(i + 1, numbers[i]));
+        }
+        sort(pairs.begin(), pairs.end(), less_than_key());
+        int start = 0, end = length - 1;
+        while (start < end)
+        {
+            int temp = pairs[start].val + pairs[end].val;
+            if (temp == target)
+            {
+                result.push_back(pairs[start].index);
+                result.push_back(pairs[end].index);
+                break;
+            }
+            if (temp < target) start++;
+            if (temp > target) end--;
+        }
+        sort(result.begin(), result.end());
+        return result;
+    }
+};
+
+int main()
+{
+                    
+    vector<int> V = { 11,2,7,15 };
+
+    Solution sum;
+    int n = 9;
+
+    vector<int> result = sum.twoSum(V, n);
+
+    for (int i = 0;i < result.size();i++) {
+        cout << result[i];
+        cout << endl;
+    }
+    return 0;
+}
