@@ -1,0 +1,67 @@
+#include <iostream> 
+
+#include <vector> 
+
+#include <climits> 
+
+using namespace std;
+
+class Solution
+
+{
+
+public:
+
+    static int maximumSumSubarray(int K, vector<int>& Arr, int N)
+
+    {
+        int i = 0;     // start index 
+
+        int j = 0;     // last index 
+
+        int sum = 0;
+
+        int maxSum = INT_MIN;   // maxSum is the result which we need 
+
+        while (j < N)       // N is size of vector or array 
+
+        {
+
+            sum = sum + Arr[j];
+
+            if (j - i + 1 < K)
+
+                j++; // increment j upto when the size of the size of window is not equal to required size 
+
+            else if ((j - i + 1) == K) // when sindow size hit to the required window size  
+
+            {
+
+                maxSum = max(maxSum, sum);  // selecting ans from the candidates 
+
+                sum = sum - Arr[i];  // start removing from the first 
+
+                i++;              // ek window decrease krege 
+
+                j++;             // Ek window increase krege 
+
+            }
+
+        }
+
+        return maxSum;
+
+    }
+
+};
+
+int main()
+
+{ 
+    vector<int>vec = { 4,3,6,2,9 };
+
+    cout << Solution::maximumSumSubarray(3, vec, 5);
+
+    return 0;
+
+}
